@@ -69,10 +69,11 @@
            2. SOPHISTICATED HEADER
            ========================================= */
         .hero-header {
-            /* Replaced solid gradient with the attached image and a subtle overlay for text readability */
-            background: linear-gradient(rgba(40, 0, 113, 0.6), rgba(26, 0, 75, 0.8)), url('image.png');
+            /* Removed the blue overlay gradient, just the image now */
+            background-image: url('image.png');
             background-size: cover;
-            background-position: center;
+            /* Changed position to top so the man's face isn't cropped */
+            background-position: top center; 
             background-repeat: no-repeat;
             
             color: white;
@@ -92,22 +93,23 @@
         }
         
         .brand-pill {
-            display: inline-block; background: rgba(255,255,255,0.25); backdrop-filter: blur(5px);
+            display: inline-block; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px);
             padding: 6px 14px; border-radius: 30px; font-size: 11px; font-weight: 700;
             text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.4);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
         }
         
         .app-name {
             font-size: 32px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;
-            color: #ffffff; /* Changed from text-clip to solid white for better contrast over image */
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            color: #ffffff; 
+            /* Added stronger text shadows to keep text readable without the blue overlay */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.8);
         }
         
         .tagline { 
-            font-size: 15px; font-weight: 500; letter-spacing: 0.5px; 
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-size: 15px; font-weight: 600; letter-spacing: 0.5px; 
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
 
         /* =========================================
@@ -234,6 +236,18 @@
         .file-name { font-size: 14px; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 2px; }
         .file-meta { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
+        /* Support Styles */
+        .support-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border-light); margin-bottom: 16px; }
+        .support-header { display: flex; align-items: center; margin-bottom: 12px; }
+        .support-icon { font-size: 20px; margin-right: 10px; background: #fdf2f8; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: var(--accent); }
+        .support-title { font-size: 16px; font-weight: 700; color: var(--text-main); }
+        .support-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+        .support-row:last-child { border-bottom: none; }
+        .contact-label { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; }
+        .contact-value { font-size: 14px; color: var(--primary); font-weight: 700; }
+        .contact-link { text-decoration: none; color: var(--primary); }
+        .email-link { font-size: 13px; color: var(--accent); font-weight: 600; }
+
         .footer { text-align: center; font-size: 11px; color: var(--text-muted); padding: 20px; margin-top: auto; opacity: 0.6; }
 
     </style>
@@ -301,12 +315,443 @@
     </div>
 
     <div id="selection" class="page">
+        <div class="nav-header">
+            <button class="back-btn" onclick="navigate('home')">&#8592;</button>
+            <div class="page-title">Select Product</div>
         </div>
-    
+        <div class="dashboard-grid">
+            <div class="action-card" onclick="navigate('alpha-variants')">
+                <div class="card-content">
+                    <div class="card-icon-box icon-blue">🏥</div>
+                    <div class="card-text"><h3>Health Alpha</h3><p>Select & Ultimate</p></div>
+                </div>
+                <div class="arrow-icon">&#10095;</div>
+            </div>
+            <div class="action-card" onclick="openExternal('superhealthcalc.html', 'Super Health')">
+                <div class="card-content">
+                    <div class="card-icon-box icon-pink">🦸</div>
+                    <div class="card-text"><h3>Super Health</h3><p>Open Calculator</p></div>
+                </div>
+                <div class="arrow-icon">&#10095;</div>
+            </div>
+        </div>
     </div>
 
+    <div id="alpha-variants" class="page">
+        <div class="nav-header">
+            <button class="back-btn" onclick="navigate('selection')">&#8592;</button>
+            <div class="page-title">Select Variant</div>
+        </div>
+        <div class="dashboard-grid">
+            <div class="action-card" onclick="openExternal('alpha_select.html', 'Alpha Select')">
+                <div class="card-content">
+                    <div class="card-icon-box icon-blue">S</div>
+                    <div class="card-text"><h3>Alpha Select</h3><p>Standard Features</p></div>
+                </div>
+                <div class="arrow-icon">&#10095;</div>
+            </div>
+            <div class="action-card" onclick="openExternal('alpha_ultimate.html', 'Alpha Ultimate')">
+                <div class="card-content">
+                    <div class="card-icon-box icon-purple">U</div>
+                    <div class="card-text"><h3>Alpha Ultimate</h3><p>Enhanced Features</p></div>
+                </div>
+                <div class="arrow-icon">&#10095;</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="external-view" class="page" style="padding-left:0; padding-right:0; padding-bottom:0;">
+        <div class="nav-header" style="padding: 10px 20px;">
+            <button class="back-btn" onclick="handleBack()">&#8592;</button>
+            <div class="page-title" id="external-title">Calculator</div>
+        </div>
+        <iframe id="external-frame" style="width:100%; height: calc(100vh - 100px); border:none; display:block;" src=""></iframe>
+    </div>
+
+    <div id="network" class="page">
+        <div class="nav-header"><button class="back-btn" onclick="navigate('home')">&#8592;</button><div class="page-title">Cashless Network</div></div>
+        
+        <div id="statusLoading" class="data-status status-loading">⌛ Connecting to database...</div>
+        <div id="statusError" class="data-status status-error">❌ Connection Failed.</div>
+        <div id="manualUpload" class="file-upload-wrapper">
+            <p style="font-size:11px; margin-bottom:5px; color:#666;">Could not auto-fetch. Please select <b>network_hospitals.xlsx</b> manually:</p>
+            <label class="custom-file-upload">
+                <input type="file" id="fileInput" accept=".xlsx, .xls" style="display:none;" onchange="handleFileSelect(event)">
+                📂 Select Excel File
+            </label>
+        </div>
+
+        <div class="search-box">
+            <div class="form-group">
+                <label class="form-label">Search Criteria</label>
+                <select id="searchType" class="form-select" onchange="updateSuggestions()">
+                    <option value="state">State</option>
+                    <option value="district">District</option>
+                    <option value="city">City</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Location Detail</label>
+                <input type="text" id="searchInput" list="dynamicOptions" class="form-input" placeholder="Type to search..." autocomplete="off">
+                <datalist id="dynamicOptions"></datalist>
+            </div>
+            <button class="btn-search" onclick="performSearch()">Find Hospitals</button>
+        </div>
+
+        <div id="resultsHeader" class="results-header">
+            <div id="resultCount" class="result-count">Found: 0 Hospitals</div>
+            <button id="pdfBtn" class="pdf-dl-btn" onclick="downloadPDF()"><span style="font-size:14px;">📄</span> Download PDF</button>
+        </div>
+
+        <div id="resultsContainer" class="hospital-list">
+            <div class="empty-state"><div class="empty-icon">🏥</div><div>Select a criteria and type to find network hospitals.</div></div>
+        </div>
+    </div>
+
+    <div id="downloads" class="page">
+        <div class="nav-header"><button class="back-btn" onclick="navigate('home')">&#8592;</button><div class="page-title">Downloads</div></div>
+        <div class="tab-wrapper">
+            <button class="tab-btn active-tab" onclick="switchTab('brochures')">Brochures</button>
+            <button class="tab-btn" onclick="switchTab('lists')">Lists</button>
+            <button class="tab-btn" onclick="switchTab('forms')">Forms</button>
+        </div>
+        
+        <div id="tab-brochures" class="tab-content active-content">
+            <div class="file-item">
+                <div class="file-icon">📘</div><div class="file-info"><span class="file-name">Alpha</span><span class="file-meta">PDF • Product Brochure</span></div>
+                <div class="action-buttons"><a href="SBI General HealthAlpha_Leaflet - Alpha Select & Alpha Ultimate.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('SBI General HealthAlpha_Leaflet - Alpha Select & Alpha Ultimate.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+            <div class="file-item">
+                <div class="file-icon">📘</div><div class="file-info"><span class="file-name">Super Health</span><span class="file-meta">PDF • Product Brochure</span></div>
+                <div class="action-buttons"><a href="Super Health AIO.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Super Health AIO.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+            <div class="file-item">
+                <div class="file-icon">📘</div><div class="file-info"><span class="file-name">Arogya Supreme</span><span class="file-meta">PDF • Product Brochure</span></div>
+                <div class="action-buttons"><a href="Arogya Supreme AIO.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Arogya Supreme AIO.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+            <div class="file-item">
+                <div class="file-icon">📘</div><div class="file-info"><span class="file-name">Super Top-up</span><span class="file-meta">PDF • Product Brochure</span></div>
+                <div class="action-buttons"><a href="Super Top-Up.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Super Top-Up.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+        </div>
+
+        <div id="tab-lists" class="tab-content">
+            
+            <div class="file-item">
+                <div class="file-icon">📑</div><div class="file-info"><span class="file-name">Annexure II</span><span class="file-meta">Non-Payable Items</span></div>
+                <div class="action-buttons"><a href="Annex II.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Annex II.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+
+            <div class="file-item">
+                <div class="file-icon">📋</div><div class="file-info"><span class="file-name">Specific List</span><span class="file-meta">All Policies</span></div>
+                <div class="action-buttons"><a href="Specific_List.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Specific_List.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+
+            <div class="file-item">
+                <div class="file-icon">✖️</div><div class="file-info"><span class="file-name">Health Multiplier</span><span class="file-meta">Super Health</span></div>
+                <div class="action-buttons"><a href="SuperHealth_Multiplier.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('SuperHealth_Multiplier.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+            
+            <div class="file-item">
+                <div class="file-icon">✈️</div><div class="file-info"><span class="file-name">Medical Treatment Abroad</span><span class="file-meta">Super Health</span></div>
+                <div class="action-buttons"><a href="SuperHealth_Abroad.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('SuperHealth_Abroad.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+
+            <div class="file-item">
+                <div class="file-icon">🪂</div><div class="file-info"><span class="file-name">Adventure Sports</span><span class="file-meta">Health Alpha</span></div>
+                <div class="action-buttons"><a href="Alpha_Adventure.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Alpha_Adventure.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+
+            <div class="file-item">
+                <div class="file-icon">🏋️</div><div class="file-info"><span class="file-name">Gym & Sports Injury</span><span class="file-meta">Health Alpha</span></div>
+                <div class="action-buttons"><a href="Alpha_Gym.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Alpha_Gym.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+
+            <div class="file-item">
+                <div class="file-icon">🌍</div><div class="file-info"><span class="file-name">Global Cover</span><span class="file-meta">Health Alpha</span></div>
+                <div class="action-buttons"><a href="Alpha_Global.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('Alpha_Global.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+        </div>
+
+        <div id="tab-forms" class="tab-content">
+            <div class="file-item">
+                <div class="file-icon">📋</div><div class="file-info"><span class="file-name">AML Form</span><span class="file-meta">KYC Declaration</span></div>
+                <div class="action-buttons"><a href="AML Form.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('AML Form.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button></div></div>
+            <div class="file-item">
+                <div class="file-icon">🏥</div><div class="file-info"><span class="file-name">Claim Form</span><span class="file-meta">Reimbursement</span></div>
+                <div class="action-buttons"><a href="claim_form.pdf" download class="interact-btn btn-dl" title="Download"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></a><button class="interact-btn btn-wa" onclick="shareSmart('claim_form.pdf')" title="Share"><svg class="btn-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <script>
-    // ... all your existing JavaScript remains identical ...
+    /* --- GLOBAL DATA STORAGE --- */
+    let hospitalData = [];
+    let uniqueLists = { state: new Set(), district: new Set(), city: new Set() };
+
+    function navigate(pageId) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0,0);
+
+        if(pageId === 'network' && hospitalData.length === 0) {
+            loadExcelData();
+        }
+    }
+
+    /* --- BACK NAVIGATION HANDLER --- */
+    function handleBack() {
+        const viewer = document.getElementById('external-view');
+        if (viewer.classList.contains('active')) {
+            const currentTitle = document.getElementById('external-title').innerText;
+            
+            // Go back to HOME for Dashboard and EMI Calculator
+            if (currentTitle === 'Performance Dashboard' || currentTitle === 'EMI Calculator') {
+                navigate('home');
+            } 
+            // Go back to VARIANT SELECTION for Alpha products
+            else if (currentTitle === 'Alpha Select' || currentTitle === 'Alpha Ultimate') {
+                navigate('alpha-variants');
+            } 
+            // Go back to PRODUCT SELECTION for Super Health
+            else {
+                navigate('selection');
+            }
+        } else {
+            // Default fallback
+            navigate('home');
+        }
+    }
+
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+        const btns = document.querySelectorAll('.tab-btn');
+        if(tabName === 'brochures') btns[0].classList.add('active-tab');
+        if(tabName === 'lists') btns[1].classList.add('active-tab');
+        if(tabName === 'forms') btns[2].classList.add('active-tab');
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active-content'));
+        document.getElementById('tab-' + tabName).classList.add('active-content');
+    }
+
+    /* --- EXTERNAL CALCULATOR OPENER --- */
+    function openExternal(url, title) {
+        document.getElementById('external-title').innerText = title;
+        document.getElementById('external-frame').src = url;
+        navigate('external-view');
+    }
+
+    /* --- SHARE SMART LOGIC --- */
+    async function shareSmart(fileName) {
+        const url = fileName; 
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const file = new File([blob], fileName, { type: 'application/pdf' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: fileName,
+                    text: `Please find the attached ${fileName}.`
+                });
+            } else {
+                alert("File sharing is not supported on this device/browser. Opening file instead.");
+                window.open(url, '_blank');
+            }
+        } catch (error) {
+            console.error('Sharing failed:', error);
+            const text = `I wanted to share ${fileName} with you.`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    }
+
+    /* --- DATA PROCESSING --- */
+    function processRawData(rawData) {
+        uniqueLists = { state: new Set(), district: new Set(), city: new Set() };
+        return rawData.map(row => {
+            const newRow = {};
+            Object.keys(row).forEach(key => {
+                const cleanKey = key.toLowerCase().trim().replace(/\s+/g, '');
+                const val = row[key];
+                newRow[cleanKey] = val;
+                if(cleanKey === 'state' && val) uniqueLists.state.add(String(val).toUpperCase());
+                if(cleanKey === 'district' && val) uniqueLists.district.add(String(val).toUpperCase());
+                if(cleanKey === 'city' && val) uniqueLists.city.add(String(val).toUpperCase());
+            });
+            return newRow;
+        });
+    }
+
+    function loadExcelData() {
+        const url = "network_hospitals.xlsx";
+        fetch(url).then(res => { 
+            if(!res.ok) throw new Error("File not found");
+            return res.arrayBuffer(); 
+        }).then(data => {
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const rawJson = XLSX.utils.sheet_to_json(firstSheet);
+            hospitalData = processRawData(rawJson);
+            document.getElementById('statusLoading').style.display = 'none';
+            updateSuggestions();
+        }).catch(err => {
+            console.error("Auto-fetch failed:", err);
+            document.getElementById('statusLoading').style.display = 'none';
+            document.getElementById('statusError').style.display = 'block';
+            document.getElementById('statusError').innerText = "⚠️ Auto-load failed. Please select file manually.";
+            document.getElementById('manualUpload').style.display = 'block';
+        });
+    }
+
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const rawJson = XLSX.utils.sheet_to_json(firstSheet);
+            hospitalData = processRawData(rawJson);
+            document.getElementById('statusError').style.display = 'none';
+            document.getElementById('manualUpload').style.display = 'none';
+            updateSuggestions();
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    /* --- AUTOCOMPLETE LOGIC --- */
+    function updateSuggestions() {
+        const type = document.getElementById('searchType').value;
+        const datalist = document.getElementById('dynamicOptions');
+        const input = document.getElementById('searchInput');
+        
+        input.value = "";
+        input.placeholder = `Type ${type.charAt(0).toUpperCase() + type.slice(1)}...`;
+        
+        datalist.innerHTML = '';
+        const list = Array.from(uniqueLists[type] || []).sort();
+        list.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item;
+            datalist.appendChild(opt);
+        });
+    }
+
+    function performSearch() {
+        const type = document.getElementById('searchType').value;
+        const input = document.getElementById('searchInput');
+        const val = input.value.toLowerCase().trim();
+        const container = document.getElementById('resultsContainer');
+        const header = document.getElementById('resultsHeader');
+        const countDisplay = document.getElementById('resultCount');
+
+        container.innerHTML = '';
+        
+        if(hospitalData.length === 0) {
+            container.innerHTML = '<div class="empty-state">⚠️ Database not loaded yet.</div>';
+            return;
+        }
+
+        if(val.length < 3) {
+            container.innerHTML = '<div class="empty-state">Please select or type at least 3 characters.</div>';
+            header.style.display = 'none';
+            return;
+        }
+
+        const results = hospitalData.filter(h => {
+            let rawVal = h[type];
+            if (rawVal === undefined || rawVal === null) return false;
+            return String(rawVal).toLowerCase().includes(val);
+        });
+
+        header.style.display = 'flex';
+        countDisplay.innerText = `Found: ${results.length} Hospitals`;
+
+        if(results.length === 0) { 
+            container.innerHTML = '<div class="empty-state">No network hospitals found.</div>'; 
+        } else {
+            results.forEach(h => { 
+                const card = document.createElement('div'); card.className = 'hospital-card';
+                const name = h['hospitalname'] || "Unknown Hospital";
+                const addr = h['address'] || "";
+                const pin = h['pincode'] || "";
+                const city = h['city'] || "";
+
+                card.innerHTML = `<div class="hosp-icon">🏥</div><div class="hosp-details"><h4>${name}</h4><p>${addr}, ${city}<br>PIN: ${pin}</p><span class="badge">Cashless</span></div>`;
+                container.appendChild(card);
+            });
+        }
+    }
+
+    /* --- NATIVE JSPDF GENERATOR (Fixes Blank Pages & Memory Crashes) --- */
+    function downloadPDF() {
+        const type = document.getElementById('searchType').value;
+        const input = document.getElementById('searchInput').value.toLowerCase().trim();
+        const countDisplay = document.getElementById('resultCount').innerText;
+
+        if(!input) return;
+
+        const results = hospitalData.filter(h => {
+            let rawVal = h[type];
+            if (rawVal === undefined || rawVal === null) return false;
+            return String(rawVal).toLowerCase().includes(input);
+        });
+
+        const btn = document.getElementById('pdfBtn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '⌛ Generating...';
+        btn.disabled = true;
+
+        // Use setTimeout to allow UI to update before heavy PDF logic blocks main thread
+        setTimeout(() => {
+            try {
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Build Header
+                doc.setTextColor(40, 0, 113); // Primary Blue
+                doc.setFontSize(16);
+                doc.setFont(undefined, 'bold');
+                doc.text("SBI General Hospital List", 105, 15, { align: 'center' });
+                
+                doc.setTextColor(100, 116, 139); // Text Muted
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Search Results for: "${document.getElementById('searchInput').value}"`, 105, 22, { align: 'center' });
+                
+                doc.setFontSize(9);
+                doc.text(countDisplay, 105, 28, { align: 'center' });
+
+                // Prepare Data Array for Table
+                const tableData = results.map(h => {
+                    const name = h['hospitalname'] || "Unknown Hospital";
+                    const addr = h['address'] || "";
+                    const city = h['city'] || "";
+                    const pin = h['pincode'] || "";
+                    return [name, `${addr}, ${city} - PIN: ${pin}`];
+                });
+
+                // Generate AutoTable (Handles thousands of rows and page breaks flawlessly)
+                doc.autoTable({
+                    startY: 35,
+                    head: [['Hospital Name', 'Address & Details']],
+                    body: tableData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [40, 0, 113], textColor: [255, 255, 255], fontStyle: 'bold' },
+                    styles: { fontSize: 9, cellPadding: 4, textColor: [30, 41, 59] },
+                    alternateRowStyles: { fillColor: [248, 250, 252] },
+                    columnStyles: {
+                        0: { cellWidth: 70, fontStyle: 'bold' },
+                        1: { cellWidth: 'auto' }
+                    }
+                });
+
+                // Save PDF natively
+                doc.save(`Network_Hospitals_${document.getElementById('searchInput').value}.pdf`);
+                
+            } catch(e) {
+                console.error("PDF Generation Error:", e);
+                alert("An error occurred while generating the PDF.");
+            } finally {
+                // Restore button state
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }, 100);
+    }
 </script>
 </body>
 </html>
